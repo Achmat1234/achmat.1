@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+p {
+    color: #fff;
+}
+
+.green {
+    color: #66cc99;
+}
+
+a {
+    color: rgb(218, 153, 100);
+    font-size: 16px;
+}
+/* Float four columns side by side */
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Style the counter cards */
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #3c3c3d;
+  }
+
+a:hover {
+    text-decoration: none;
+    color: #b97f4f83;
+}
+
+.purple {
+    color: #78728c;
+}
+
+.social a {
+    background-color: transparent;
+    color: #fff;
+    width: 50px;
+    height: 40px;
+    margin: 30px 40px 30px -3px;
+    font-size: 20px;
+}
+
+.social .fb:hover {
+    color: #fff;
+    border: 1px solid #4267b2;
+    background-color: #4267b2;
+}
+
+.social .tweet:hover {
+    color: #fff;
+    border: 1px solid #4ab3f4;
+    background-color: #4ab3f4;
+}
+
+.social .g:hover {
+    color: #fff;
+    border: 1px solid #db4437;
+    background-color: #db4437;
+}
+
+body .container-fluid {
+    background-color: #212121;
+}
+
+.container-fluid .col-sm-12 {}
+
+.container-fluid .col-sm-12 h1 {
+    color: #66cc99;
+    letter-spacing: 2px;
+}
+
+strong {
+    color: moccasin;
+}
+
+
+h5 {
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+}
+
+.container-fluid .col-sm-12 h1 span {
+    color: #78728c;
+}
+
+.container-fluid .col-sm-12 .nav a,
+h4 {
+    color: #fff;
+}
+
+.container-fluid .col-sm-12 .nav a:hover {
+    color: #78728c;
+    text-decoration: none;
+
+}
+
+.container-fluid .col-sm-12 .nav .active {
+    color: #78728c;
+}
+
+table tbody tr p {
+    font-size: 12px;
+    color: #abc;
+}
+
+.table-borderless tbody tr {
+    border: 0;
+
+}
+
+ul li {
+    color: #FFF;
+}
+
+.skills img {
+    width: 50px;
+}
+
+.skills .btn-default {
+    background-color: transparent;
+    border: 0;
+}
+
+.skills .btn-default:hover {
+    background-color: transparent;
+}
