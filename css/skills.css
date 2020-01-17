@@ -1,0 +1,38 @@
+body {
+    color: #fff;
+    background-color: #000;
+    font-size: 18px;
+}
+/*comment*/
+h1 {
+    font-size: 35px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+p {
+    margin: 0 0 25px;
+    line-height: 1.5;
+}
+
+/* #skill-bar-wrapper {
+    font-size: 18px;
+} */
+
+.skillbar-container {
+    position: relative;
+    display: block;
+    margin-bottom: 15px;
+    width: 100%;
+    background-color: #666463;
+    background-color: rgba(255, 255, 255, .1);
+    height: 35px;
+    height: 5px;
+}
+
+.skills {
+    height: 35px;
+    height: 5px;
+    width: 0px;
+}
