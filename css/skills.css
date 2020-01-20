@@ -1,11 +1,11 @@
 body {
     color: #fff;
     background-color: #000;
-    font-size: 18px;
+    font-size: 25px;
 }
 /*comment*/
 h1 {
-    font-size: 35px;
+    font-size: 55px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
