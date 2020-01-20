@@ -27,12 +27,12 @@ p {
     width: 100%;
     background-color: #666463;
     background-color: rgba(255, 255, 255, .1);
-    height: 70%;
-    height: 50%;
+    height: 70px;
+    height: 50px;
 }
 
 .skills {
-    height: 100%;
-    height: 50%;
+    height: 100px;
+    height: 50px;
     width: 100%;
 }
