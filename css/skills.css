@@ -13,7 +13,7 @@ h1 {
 
 p {
     margin: 0 0 25px;
-    line-height: 1.5;
+    line-height: 2.5;
 }
 
 /* #skill-bar-wrapper {
@@ -27,12 +27,12 @@ p {
     width: 100%;
     background-color: #666463;
     background-color: rgba(255, 255, 255, .1);
-    height: 35px;
-    height: 5px;
+    height: 70%;
+    height: 50%;
 }
 
 .skills {
-    height: 80%;
-    height: 5px;
+    height: 100%;
+    height: 50%;
     width: 100%;
 }
