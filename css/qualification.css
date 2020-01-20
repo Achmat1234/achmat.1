@@ -204,7 +204,8 @@ Please do not claim this website as your own. You don't have to give me credit b
 
 body {
     font-family: 'Roboto', sans-serif;
-    font-size: 26px;
+    font-size: 40px;
+    text-align: center;
     color: darkslategray;
     width: 100%;
     height: 100%;
