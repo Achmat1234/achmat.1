@@ -43,15 +43,17 @@ a {
   
   /* Style the counter cards */
   .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
+    box-shadow: 0 4px 12px 0 rgba(0, 169, 0, 1);
+    padding: 13px;
     text-align: center;
     background-color: #3c3c3d;
-  }
-
+    margin-top: 22px;
+    shape-outside: padding-box;
+}
 a:hover {
     text-decoration: none;
-    color: #b97f4f83;
+    box-shadow: 0 4px 12px 0 rgba(0, 169, 0, 1);
+    color: #03fad183;
 }
 
 .purple {
