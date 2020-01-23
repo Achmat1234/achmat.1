@@ -153,3 +153,11 @@ ul li {
 .skills .btn-default:hover {
     background-color: transparent;
 }
+
+.thumbnail>img {
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 0 0px 144px 0 rgba(0, 175, 164, 1);
+    text-decoration: none;
+    color: #03fad183;
+}
