@@ -1,6 +1,10 @@
+@media screen and (max-width: 1020px) { /* Large Desktop */ }
+@media screen and (max-width: 780px) { /* tablet */ }
+@media screen and (max-width: 480px) { /* mobile */ }
+
 * {
     box-sizing: border-box;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', sans-serif;    
 }
 
 p {
@@ -89,7 +93,13 @@ a:hover {
 
 body .container-fluid {
     background-color: #212121;
+    /* background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../img/1.jpg);
+    position: relative; */
 }
+
 
 .container-fluid .col-sm-12 {}
 
@@ -153,6 +163,7 @@ ul li {
 .skills .btn-default:hover {
     background-color: transparent;
 }
+
 
 .thumbnail>img {
     margin-right: auto;

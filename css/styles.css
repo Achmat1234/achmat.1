@@ -1,3 +1,7 @@
+@media screen and (max-width: 1020px) { /* Large Desktop */ }
+@media screen and (max-width: 780px) { /* tablet */ }
+@media screen and (max-width: 480px) { /* mobile */ }
+
 body{
     margin: 0;
     background:#ccc;

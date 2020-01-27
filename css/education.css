@@ -1,3 +1,7 @@
+@media screen and (max-width: 1020px) { /* Large Desktop */ }
+@media screen and (max-width: 780px) { /* tablet */ }
+@media screen and (max-width: 480px) { /* mobile */ }
+
 html {
     background-color: black;
     
@@ -43,6 +47,7 @@ section {
 
 .timeline-label p {
     color: #696969;
+    box-shadow: 0 4px 12px 0 rgba(0, 169, 0, 1);
     font-size: 29px;
     font-family: serif;
     padding: 23px 28px;
@@ -116,6 +121,7 @@ section {
 .timeline .timeline-experience {
     position: relative;
     float: left;
+    box-shadow: 0 4px 10px 0 rgba(3, 255, 255, 1);
     margin-left: 32px;
     padding-left: 64px;
     border-left: 2px solid #ccc;
@@ -132,6 +138,7 @@ section {
 .timeline .timeline-experience-info .timeline-role {
     font-size: 26px;
     color: #0080A1;
+    box-shadow: 0 4px 10px 0 rgba(3, 255, 255, 1);
     font-weight: 600;
 }
 
@@ -177,6 +184,7 @@ section {
 
 .timeline .timeline-experience-img img {
     width: 100%;
+    box-shadow: 0 4px 17px 0 rgba(219, 222, 255, 1);
 }
 
 .timeline .timeline-experience-info {
@@ -238,6 +246,7 @@ h2 {
 h2:after {
     content: '';
     width: 50%;
+    box-shadow: 0 4px 10px 0 rgba(3, 255, 255, 1);
     height: 4px;
     background: #40E0D0;
     display: block;

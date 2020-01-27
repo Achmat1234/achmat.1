@@ -1,3 +1,7 @@
+@media screen and (max-width: 1020px) { /* Large Desktop */ }
+@media screen and (max-width: 780px) { /* tablet */ }
+@media screen and (max-width: 480px) { /* mobile */ }
+
 body {
     color: #fff;
     background-color: #000;
@@ -35,4 +39,15 @@ p {
     height: 100px;
     height: 50px;
     width: 100%;
+}
+
+.text-left {
+    text-align: left;
+    box-shadow: 0 4px 73px 0 rgba(3, 255, 255, 1);
+}
+.skills{
+    background: white;
+    width: 50%;
+    box-shadow: rgb(0, 255, 0) 0px 4px 12px 0px;
+    overflow: hidden;
 }
