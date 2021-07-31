@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="css/style/style.css">
+
+    <style type="text/css" media="print">
+        .noprint {
+            display: none
+        }
+        
+        .print {
+            display: block !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <header class="el-header noprint">
+            <div class="icon-btns">
+                <i class="icon-list" @click="changeLeftMenu"></i>
+                <i class="icon-skip_previous" v-bind:class="{'disabled': currentPage == 1}" @click="changeCurrentPage('first')"></i>
+                <i class="icon-play_arrow prev-icon" v-bind:class="{'disabled': currentPage == 1}" @click="changeCurrentPage('prev')"></i>
+                <i class="icon-play_arrow" v-bind:class="{'disabled': currentPage == pageNum}" @click="changeCurrentPage('next')"></i>
+                <i class="icon-skip_next" v-bind:class="{'disabled': currentPage == pageNum}" @click="changeCurrentPage('last')"></i>
+                <select v-model="currentPage">
+                    <option v-for="page in pageNum" v-bind:value="page">page {{ page }}</option>
+                </select>
+                <i class="icon-zoom_in" v-bind:class="{'disabled': zoomNum == 2}" @click="modifyZoom('in')"></i>
+                <select v-model="zoomNum">
+                    <option value="0.5">50%</option>
+                    <option value="0.6">60%</option>
+                    <option value="0.7">70%</option>
+                    <option value="0.8">80%</option>
+                    <option value="0.9">90%</option>
+                    <option value="1.0" selected>100%</option>
+                    <option value="1.1">110%</option>
+                    <option value="1.2">120%</option>
+                    <option value="1.3">130%</option>
+                    <option value="1.4">140%</option>
+                    <option value="1.5">150%</option>
+                    <option value="1.6">160%</option>
+                    <option value="1.7">170%</option>
+                    <option value="1.8">180%</option>
+                    <option value="1.9">190%</option>
+                    <option value="2.0">200%</option>
+                </select>
+                <i class="icon-zoom_out" v-bind:class="{'disabled': zoomNum == 0.5}" @click="modifyZoom('out')"></i>
+                <i class="icon-format_align_left" @click="textAlign = 'left'"></i>
+                <i class="icon-format_align_center" @click="textAlign = 'center'"></i>
+                <i class="icon-format_align_right" @click="textAlign = 'right'"></i>
+                <i class="icon-print" @click="window.print()"></i>
+            </div>
+
+            <button class="button button2" ><a href="index.html">Back to CV</a></button>
+
+        </header>
+
+        <aside class="noprint" width="240px" v-show="ifMenuShow">
+            <nav class="tabNav">
+                <ul>
+                    <li v-bind:class="{ 'curr': currentNav == 0 }" @click="currentNav = 0">Page</li>
+                    <li v-bind:class="{ 'curr': currentNav == 1 }" @click="currentNav = 1">Bookmark</li>
+                </ul>
+
+                <div class="clear"></div>
+            </nav>
+
+            <div class="tab-conent scrollbar" v-bind:style="{ height: asideHeight + 'px' }">
+
+            <section v-show="currentNav == 0">
+                <ul class="page-menu">
+                    <li v-for="page in pageNum" v-bind:class="{ 'curr': currentPage == page }" @click="changePage(page)"><i class="icon-file-text2"></i> page {{ page }}</li>
+                </ul>
+            </section>
+
+            <section v-show="currentNav == 1">
+                <ul class="page-menu">
+                    <li v-for="page in pageNum" v-bind:class="{ 'curr': currentPage == page }" @click="changePage(page)"><i class="icon-turned_in_not"></i> Bookmark {{ page }}</li>
+                </ul>
+            </section>
+        </div>
+
+        </aside>
+        <div class="main scrollbar noprint"  v-bind:style="{ height: mainHeight + 'px' }" v-bind:class="{ 'mainLeftM': ifMenuShow, 'aleft': textAlign === 'left','acenter': textAlign === 'center','aright': textAlign === 'right'}">
+            <div class="conent" v-html="pageContent" v-bind:style="zoomStyle"></div>
+
+            <div class="clear"></div>
+        </div>
+
+        
+        <div class="conent print" style="display:none" v-html="pageContent"></div>
+    </div>
+</body>
+
+<script src="js/vue.min.js"></script>
+<script>
+
+var app = new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                // visible: false,
+                isCollapse: false,
+                currentNav: 0,
+                activeName2: 'first',
+                pageNum: 1, 
+                currentPage: 1,
+                pageContent: '',
+                asideHeight: 300,
+                mainHeight: 300,
+                ifMenuShow: true,
+                zoomNum: '1.0',
+                textAlign: 'left',
+                zoomStyle: {},
+                pageDatas: ['<div style="position:absolute;top:0.000000px;left:0.000000px"><nobr><img height="1588.000000" width="1124.000000" src ="img/letter2.jpg"/></nobr></div><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:211.000000px;left:895.000000px"><nobr>September 27, 2019 </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:249.000000px;left:96.000000px"><nobr>Mr Gregory Brophy </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:268.000000px;left:96.000000px"><nobr>CEO </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:287.000000px;left:96.000000px"><nobr>iTouch Messaging Services </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:306.000000px;left:96.000000px"><nobr>Portside Building </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:325.000000px;left:96.000000px"><nobr>4 Bree Street </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:344.000000px;left:96.000000px"><nobr>Cape Town 8001 </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:382.000000px;left:96.000000px"><nobr>Dear Mr Gregory Brophy </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:420.000000px;left:96.000000px"><nobr>Achmat Armien started studying at CodeSpace on 8 June 2019 and successfully completed the four week Web Academy. Due to his hard work, </nobr></span><span style="position:absolute;top:439.000000px;left:96.000000px"><nobr>perseverance and determination to succeed, he was accepted to participate in the fifteen week Web Intensive. Now, with four weeks left of </nobr></span><span style="position:absolute;top:458.000000px;left:96.000000px"><nobr>the course, Achmat has continued to display these traits. He has shown commitment throughout the program, with a great attendance rate </nobr></span><span style="position:absolute;top:477.000000px;left:96.000000px"><nobr>and compliance to project deadlines. Achmat has also shown loyalty and support for his fellow classmates, building positive relationships, and </nobr></span><span style="position:absolute;top:496.000000px;left:96.000000px"><nobr>speaking up on behalf of others. He has grown in confidence and professional communication skills. </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:534.000000px;left:96.000000px"><nobr>Below are listed the skills and development tasks Achmat has been taught during his time at CodeSpace: </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:572.000000px;left:96.000000px"><nobr>1. Web Academy: </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:607.520020px;left:120.000000px"><nobr>● <span style="font-family:Calibri;">Understanding fundamental computer science principles </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:626.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Data structures </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:645.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Loops </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:664.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Conditionals </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:683.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Algorithms </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:702.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Debugging </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:721.520020px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:740.520020px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:724.000000px;left:144.000000px"><nobr>Being able to code a website using HTML, CSS, JavaScript </nobr></span><span style="position:absolute;top:743.000000px;left:144.000000px"><nobr>Be able to use front-end frameworks </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:759.520020px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:762.000000px;left:144.000000px"><nobr>Collaboration and Git </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:778.520020px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:781.000000px;left:144.000000px"><nobr>Managing code versions and developments </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:797.520020px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:800.000000px;left:144.000000px"><nobr>Internet architecture </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:838.000000px;left:96.000000px"><nobr>2. Web Intensive: </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:873.520020px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:876.000000px;left:144.000000px"><nobr>Responsive web design </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:892.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Building HTML5 responsive websites </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:930.519958px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:911.519958px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Making web pages responsive using CSS, Flexbox, CSS Grid, and Bootstrap </span></nobr></span><span style="position:absolute;top:933.000000px;left:144.000000px"><nobr><span style="font-family:Calibri;">JavaScript Fundamentals </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:949.519958px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:952.000000px;left:144.000000px"><nobr>PHP </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:968.519958px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:971.000000px;left:144.000000px"><nobr>AJAX </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:987.519958px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:990.000000px;left:144.000000px"><nobr>Creating asynchronous web applications </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1006.519958px;left:120.000000px"><nobr>● </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1009.000000px;left:144.000000px"><nobr>21st Century skills </nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1025.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Leading learning: directing own learning in a fast past environment </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1044.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Leading Career: communication &amp; collaboration skills </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1063.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Leading Self: decision making and emotional intelligence skills </span></nobr></span></span></p><p><span style="font-family:Arial;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1082.520020px;left:168.000000px"><nobr>○ <span style="font-family:Calibri;">Leading Change: designing, creating and sharing innovative ideas for social good </span></nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1142.000000px;left:96.000000px"><nobr>Thank you for your consideration of Achmat ’s application. His progress and performance as a student indicate that in the workplace Achmat is </nobr></span><span style="position:absolute;top:1161.000000px;left:96.000000px"><nobr>likely to work well with others, to be highly teachable and to go the extra mile to learn and meet his project briefs. </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1199.000000px;left:96.000000px"><nobr>We wish him all the best in his career. </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1256.000000px;left:96.000000px"><nobr>Sincerely, </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1294.000000px;left:96.000000px"><nobr>Tegan Crous </nobr></span></span></p><p><span style="font-family:Calibri;font-size:12.000000px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1329.000000px;left:96.000000px"><nobr>Course Administrator </nobr></span></span></p><p><span style="font-family:Calibri;font-size:7.995001px;font-weight:bold;color:#6CA093;"><span style="position:absolute;top:1491.005005px;left:321.000000px"><nobr>T </nobr></span></span></p><p><span style="font-family:Calibri;font-size:7.995001px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1491.005005px;left:328.685211px"><nobr>021 685 0991 </nobr></span></span></p><p><span style="font-family:Calibri;font-size:7.995001px;font-weight:bold;color:#6CA093;"><span style="position:absolute;top:1491.005005px;left:389.922211px"><nobr>W </nobr></span></span></p><p><span style="font-family:Calibri;font-size:7.995001px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1491.005005px;left:401.988434px"><nobr>codespace.co.za </nobr></span></span></p><p><span style="font-family:Calibri;font-size:7.995001px;font-weight:bold;color:#6CA093;"><span style="position:absolute;top:1491.005005px;left:474.922485px"><nobr>A </nobr></span></span></p><p><span style="font-family:Calibri;font-size:7.995001px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1491.005005px;left:483.788788px"><nobr>403 Old Castle Brewery, 6 Beach Road, Woodstock, Cape Town </nobr></span></span></p><p><span style="font-family:Calibri;font-size:7.995001px;font-style:normal;font-weight:normal;color:#595959;"><span style="position:absolute;top:1504.005005px;left:460.000000px"><nobr>CodeSpace PTY Ltd | Reg no: 2017/242154/07 </nobr></span></span></p>']
+            }
+        },
+        mounted: function() {
+            this.$nextTick(function() {
+                this.pageNum = this.pageDatas.length;
+                this.pageContent = this.pageDatas[0];
+
+                this.setLeftMenuHeight();
+            })
+        },
+        watch: {
+            'currentPage': function(newVal, oldValue) {
+                // console.log('newVal ' + newVal, 'oldValue ' + oldValue);
+                if (newVal) {
+                    this.pageContent = this.pageDatas[this.currentPage - 1];
+                }
+            },
+            'zoomNum': function(newVal, oldValue) {
+                if (newVal) {
+                    this.zoomStyle = {
+                        'transform': 'scale(' + newVal + ')',
+                        '-webkit-transform': 'scale(' + newVal + ')',
+                        '-ms-transform': 'scale(' + newVal + ')',
+                        '-moz-transform': 'scale(' + newVal + ')',
+                        '-o-transform': 'scale(' + newVal + ')'
+                    }
+                }
+            }
+        },
+        methods: {
+            
+            changeCurrentPage: function(methods) {
+                switch (methods) {
+                    case 'first':
+                        this.currentPage = 1;
+                        break;
+                    case 'prev':
+                        if (this.currentPage > 1) {
+                            this.currentPage -= 1;
+                        }
+                        break;
+                    case 'next':
+                        if (this.currentPage < this.pageNum) {
+                            this.currentPage += 1;
+                        }
+                        break;
+                    case 'last':
+                        this.currentPage = this.pageNum;
+                        break;
+                }
+            },
+
+            gotoPage: function(page) {
+                console.log(page);
+                this.currentPage = page;
+            },
+            modifyZoom: function(type) {
+                switch (type) {
+                    case 'in':
+                        if (this.zoomNum < 2) {
+                            // this.zoomNum = (this.zoomNum + 0.1).toFixed(1);
+                            this.zoomNum = (parseFloat(this.zoomNum) + 0.1).toFixed(1);
+                        }
+                        break;
+                    case 'out':
+                        if (this.zoomNum > 0.5) {
+                            this.zoomNum = (parseFloat(this.zoomNum) - 0.1).toFixed(1);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                console.log(this.zoomNum);
+            },
+            setLeftMenuHeight: function() {
+                // this.asideHeight = document.body.scrollHeight - 60;
+                this.mainHeight = document.documentElement.clientHeight - 60 - 20;
+                //padding
+                this.asideHeight = this.mainHeight - 20 - 46;
+            },
+            changePage: function(page) {
+                this.currentPage = page;
+                // this.pageContent = this.pageDatas[page - 1];
+            },
+            changeLeftMenu: function() {
+                this.ifMenuShow = !this.ifMenuShow;
+            }
+        }
+    });
+
+function gotoPage(page) {
+    console.log(page);
+    app.gotoPage(page);
+}
+
+</script>
+
+</html>
